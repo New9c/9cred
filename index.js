@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const { MongoClient } = require('mongodb');
 require('dotenv').config();
 const URI = process.env.CONNECTION_STRING;
@@ -12,8 +13,7 @@ async function connectDB() {
 }
 connectDB();
 
-app.use(express.static('public')); // serve static HTML/CSS/JS from /public
-
+app.use(cors());
 // API endpoint to fetch redirect info given a custom URL
 app.get('/api/go/:name', async (req, res) => {
   const name = req.params.name;
