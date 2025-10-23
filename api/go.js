@@ -15,7 +15,7 @@ connectDB();
 
 app.use(cors());
 // API endpoint to fetch redirect info given a custom URL
-app.get('/api/go/:name', async (req, res) => {
+app.get('/:name', async (req, res) => {
   const name = req.params.name;
   const result = await db.collection('redirects').findOne({ name: name });
   if (result) {
@@ -24,4 +24,5 @@ app.get('/api/go/:name', async (req, res) => {
     res.status(404).json({ error: 'Not found' });
   }
 });
-app.listen(3000, () => console.log('Server running'));
+
+module.exports = app;
